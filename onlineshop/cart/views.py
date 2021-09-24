@@ -3,6 +3,7 @@ from django.shortcuts import redirect, render , get_object_or_404
 from .cart import Cart
 from .forms import QuantityForm
 from shop.models import Item
+from django.contrib import messages
 from django.views.decorators.http import require_POST
 # Create your views here.
 
@@ -22,4 +23,15 @@ def cart_add(request,product_id):
     if form.is_valid():
         cd = form.cleaned_data
         cart.add(product=product,quantity=cd['quantity'])
+    return redirect ('cart:shop_summary')
+
+
+
+
+
+def cart_delete(request,product_id):
+    cart = Cart(request)
+    product = Item.objects.get(id=product_id)
+    cart.Delete_session(product=product)
+    messages.success(request,'You deleted succesfuly','info')
     return redirect ('cart:shop_summary')
