@@ -1,10 +1,17 @@
+{% include 'messages.html' %}
+
+
 
 {% load static %}
 
 
 
+
+
+
 <!DOCTYPE html>
 <html lang="en">
+
 
 <head>
   <meta charset="utf-8">
@@ -51,7 +58,6 @@
 </head>
 
 <body>
-
   <!-- Navbar -->
   <nav class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar">
     <div class="container">
@@ -80,6 +86,19 @@
           <li class="nav-item">
             <a class="nav-link waves-effect" href="#" target="_blank">About MRX</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link waves-effect" href="#" target="_blank">Contact</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link waves-effect" href="{% url 'accounts:login'%}" target="_blank">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link waves-effect" href="#" target="_blank">Sign in </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link waves-effect" href="#" target="_blank">Log out</a>
+          </li>
+          
         </ul>
 
         <!-- Right -->

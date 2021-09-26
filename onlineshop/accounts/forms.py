@@ -39,3 +39,11 @@ class UserChangeForm(forms.ModelForm):
 
     model = User
     fields = ('email','phone','password','is_active','is_admin')
+
+
+
+
+
+class User_login (forms.Form):
+    email = forms.EmailField(max_length=250)
+    password = forms.CharField(widget=forms.PasswordInput)
