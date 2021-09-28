@@ -47,3 +47,9 @@ class UserChangeForm(forms.ModelForm):
 class User_login (forms.Form):
     email = forms.EmailField(max_length=250)
     password = forms.CharField(widget=forms.PasswordInput)
+
+class User_rejister (forms.Form):
+    email = forms.EmailField(max_length=250)
+    phone = forms.IntegerField()
+    password1 = forms.CharField(widget=forms.PasswordInput)
+    password2 = forms.CharField(widget=forms.PasswordInput)
