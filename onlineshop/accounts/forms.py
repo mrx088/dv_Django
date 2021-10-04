@@ -2,6 +2,7 @@ from django import forms
 from .models import User
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.core.exceptions import ValidationError
+from phonenumber_field.formfields import PhoneNumberField
 
 
 
@@ -39,3 +40,27 @@ class UserChangeForm(forms.ModelForm):
 
     model = User
     fields = ('email','phone','password','is_active','is_admin')
+
+
+
+
+
+class User_login (forms.Form):
+    email = forms.EmailField(max_length=250)
+    password = forms.CharField(widget=forms.PasswordInput)
+
+class User_rejister (forms.Form):
+    full_name = forms.CharField(max_length=200)
+    email = forms.EmailField(max_length=250)
+    phone = PhoneNumberField()
+    password = forms.CharField(widget=forms.PasswordInput)
+    password3 = forms.CharField(widget=forms.PasswordInput)
+    
+
+    def clean_password3(self) :
+        p1 = self.cleaned_data.get('password')
+        p2 = self.cleaned_data.get('passwor3')
+
+        if p1 and p2 and p1 != p2 :
+           raise ValidationError ('passwords arent same')
+        return p2
