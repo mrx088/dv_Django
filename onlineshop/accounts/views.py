@@ -2,7 +2,7 @@
 from django.contrib import messages
 from django.shortcuts import redirect, render
 from .forms import User_login , User_rejister
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from .models import User
 
 
@@ -41,6 +41,12 @@ def accounts_rejister(request):
     else:
         form = User_rejister()
     return render(request,'accounts/rejister.html',{'form':form})
+
+
+def accounts_logout (request):
+    logout(request)
+    messages.info(request,'Logout successfuly')
+    return redirect('shop:shops')
 
 
 

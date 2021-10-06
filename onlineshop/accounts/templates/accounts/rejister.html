@@ -99,3 +99,14 @@
 </body>
 </html>
 
+
+
+
+
+<form action="" method="POST">
+	{% csrf_token %}
+	{{form.as_p}}
+	<input type="submit" value="signin">
+
+</form>
+

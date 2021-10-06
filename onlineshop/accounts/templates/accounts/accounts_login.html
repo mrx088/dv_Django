@@ -7,6 +7,8 @@
 	<title>Login V16</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
 <!--===============================================================================================-->	
 	<link rel="icon" type="image/png" href="{% static 'accounts/images/icons/favicon.ico' %}"/>
 <!--===============================================================================================-->
@@ -38,7 +40,7 @@
 				<span class="login100-form-title p-b-41">
 					Account Login
 				</span>
-				<form method="POST" class="login100-form validate-form p-b-33 p-t-5">
+				<form method="POST" class="login100-form validate-form p-b-33 p-t-5" novalidate>
 					{% csrf_token %}
 					<div class="wrap-input100 validate-input" data-validate = "Enter email">
 						<input class="input100" type="email" name="email" placeholder="email">
@@ -60,9 +62,18 @@
 			</div>
 		</div>
 	</div>
+
+
+	<form action="" method="POST" novalidate>
+		{% csrf_token %}
+		{{form.as_p}}
+		<input type="submit" value="login">
+
+
+	</form>
 	
 
-	<div id="dropDownSelect1"></div>
+
 	
 <!--===============================================================================================-->
 	<script src="{% static 'accounts/vendor/jquery/jquery-3.2.1.min.js' %}"></script>
@@ -80,6 +91,8 @@
 	<script src="{% static 'accounts/vendor/countdowntime/countdowntime.js' %}"></script>
 <!--===============================================================================================-->
 	<script src="{% static 'js/main.js' %}"></script>
+	<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ" crossorigin="anonymous"></script>
 
 </body>
 </html>
