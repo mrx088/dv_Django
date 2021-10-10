@@ -23,7 +23,7 @@
         </td>
         <td>{{ item.quantity }}</td>
         <td>{{ item.price }}</td>
-        <td>{{ item.get_total_price}}</td>
+        <td>{{ item.get_total_price }}</td>
         <td></td>
         <td><a class="btn btn-danger" href="{% url 'cart:cart_delete' item.product.id %}"> delete </a></td>
       </tr>

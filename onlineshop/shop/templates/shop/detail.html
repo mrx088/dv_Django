@@ -46,9 +46,10 @@
             <p class="lead font-weight-bold">{{item.name}}</p>
 
 
-            <form action="" class="d-flex justify-content-left" method="POST" >
+            <form action="{% url 'cart:cart_add' item.id %}" class="d-flex justify-content-left" method="POST" >
               <!-- Default input -->
-              <input  type="number" value="1" aria-label="Search" class="form-control" style="width: 100px">
+              {% csrf_token %}
+              <input name="quantity" type="number" value="1" aria-label="Search" class="form-control" style="width: 100px">
               <button class="btn btn-primary btn-md my-0 p" type="submit">Add to cart
                 <i class="fas fa-shopping-cart ml-1"></i>
               </a>
@@ -120,11 +121,5 @@
 
 
 
-  <form action="{% url 'cart:cart_add' item.id %}" class="d-flex justify-content-left" method="POST" >
-    <!-- Default input -->
-      {% csrf_token %}
-      {{form.as_p}}
-    <input  type="submit" value="send">
 
-  </form>
 {% endblock content %}
