@@ -1,17 +1,20 @@
 from django.shortcuts import redirect, render,get_object_or_404
+
+from comments.models import Comments_Model
 from .models import Item, Order, OrderItem , Category
 from django.conf import settings
 from django.utils import timezone
 from cart.forms import QuantityForm
 from django.core.paginator import Paginator
+from cart.cart import Cart
 
 # Create your views here.
-
 
 
 def shops (request,slug=None) :
 
     items = Item.objects.all()
+    cart  = Cart(request)
     category = Category.objects.all()
     paginator = Paginator(items,8)
     page_number= request.GET.get('page')
@@ -22,13 +25,14 @@ def shops (request,slug=None) :
          page_number= request.GET.get('page')
          page_obj= paginator.get_page(page_number)
         
-    return render(request,'shop/home.html',{'page_obj':page_obj,'category':category,})
+    return render(request,'shop/home.html',{'page_obj':page_obj,'category':category,'cart':cart})
 
 
 def shops_detail (request,slug) :
     item = get_object_or_404(Item,slug=slug)
+    comments = Comments_Model.objects.filter(item=item , is_reply=False)
     form = QuantityForm()
-    return render(request,'shop/detail.html',{'item':item,'form':form})
+    return render(request,'shop/detail.html',{'item':item,'form':form,'comments':comments})
 
 def add_to_cart (request,slug) :
     item = get_object_or_404(Item,slug=slug)

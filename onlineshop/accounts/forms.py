@@ -71,3 +71,19 @@ class User_rejister (forms.Form):
         if p1 and p2 and p1 != p2 :
            raise ValidationError ('passwords arent same')
         return p2
+
+
+class PhoneloginForm (forms.Form) :
+    phone = forms.IntegerField()
+
+
+    # def clean_phone(self):
+    #     phone = f"+98{self.cleaned_data['phone']}"
+    #     user = User.objects.filter(phone=phone)
+    #     if not user.exists():
+    #         raise ValidationError("This phone number isnt signup in website")
+    #     else:   
+    #         return self.cleaned_data['phone']
+
+class Code (forms.Form) :
+    code = forms.IntegerField()

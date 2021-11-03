@@ -79,15 +79,19 @@
         <!-- Left -->
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link waves-effect" href="#">Home
-              <span class="sr-only">(current)</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link waves-effect" href="#" target="_blank">About MRX</a>
+          
+            {% if user.is_authenticated and request.user.id == user.id  %} 
+            <li class="nav-item">
+              <a class="nav-link waves-effect" href="{% url 'accounts:dashboard' user.id %}" >Dshboard</a>
+            </li>
+            {% endif %}
           </li>
           <li class="nav-item">
             <a class="nav-link waves-effect" href="{% url 'contact:contact_us' %}" >Contact</a>
+          </li>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link waves-effect" href="{% url 'accounts:users' %}" >Users</a>
           </li>
           {% if request.user.is_authenticated %}
           <li class="nav-item">
@@ -98,16 +102,22 @@
             <a class="nav-link waves-effect" href="{% url 'accounts:login'%}" >Login</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link waves-effect" href="{% url 'accounts:phonelogin'%}" >Login via Phone</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link waves-effect" href="{% url 'accounts:rejister'%}" >Sign in </a>
           </li>
           {% endif %}          
         </ul>
 
         <!-- Right -->
+        {% if request.user.is_authenticated %}
         <ul class="navbar-nav nav-flex-icons">
           <li class="nav-item">
             <a class="nav-link waves-effect">
-              <span class="badge red z-depth-1 mr-1"> 1 </span>
+              
+              <span class="badge red z-depth-1 mr-1">{{request.session.cart.keys|length}}</span>
+          
               <i class="fas fa-shopping-cart"></i>
               <span class="clearfix d-none d-sm-inline-block"> Cart </span>
             </a>
@@ -129,6 +139,7 @@
             </a>
           </li>
         </ul>
+        {% endif %}
 
       </div>
 
@@ -217,6 +228,9 @@
     new WOW().init();
 
   </script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+{% block js_files%}{% endblock js_files%}
 </body>
 
 </html>

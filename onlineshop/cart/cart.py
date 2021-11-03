@@ -2,7 +2,6 @@ from shop.models import Item
 from decimal import Decimal
 
 SESSION_NAME = 'cart'
-
 class Cart:
 
 
@@ -28,9 +27,15 @@ class Cart:
 
     def add (self,product,quantity):
         product_id = str(product.id)
+        product_dis = Item.objects.get(id=product.id)
 
-        if product_id not in self.cart:
-            self.cart[product_id] = {'quantity':0, 'price':str(product.price)}
+
+        if product_id not in self.cart and product_dis.discount is not None:
+            self.cart[product_id] = {'quantity':0, 'price':str(product.discount),}
+        
+
+        if product_id not in self.cart and product_dis.discount is None:
+            self.cart[product_id] = {'quantity':0, 'price':str(product.price),}
         
         self.cart[product_id]['quantity'] += quantity
 
@@ -50,14 +55,19 @@ class Cart:
         return sum(Decimal(item['price']) * item['quantity'] for item in self.cart.values())
 
 
-    def clear(self):
-        del self.session[SESSION_NAME]
-        self.save()
 
 
     def save(self):
         self.session.modified = True
 
 
+    def __len__(self):
+        """
+        Count all items in the cart.
+        """
+        return sum(item['quantity'] for item in self.cart.values())
 
     
+    def clear(self):
+        del self.session[SESSION_NAME]
+        self.save()

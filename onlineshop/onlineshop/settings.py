@@ -42,6 +42,13 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'cart.apps.CartConfig',
     'contacts.apps.ContactsConfig',
+    'orders.apps.OrdersConfig',
+    'comments.apps.CommentsConfig',
+
+
+     # Other apps
+    "phonenumber_field",
+    'sorl.thumbnail',
 ]
 
 MIDDLEWARE = [
@@ -77,7 +84,7 @@ WSGI_APPLICATION = 'onlineshop.wsgi.application'
 
 
 AUTH_USER_MODEL = 'accounts.User'
-
+LOGIN_URL ='accounts:login'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
@@ -134,3 +141,12 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'media/')
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# GMAIL (SMTP)
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'mrx.unknown.08@gmail.com'
+EMAIL_HOST_PASSWORD = 'dpkuewdnojanvctk'
