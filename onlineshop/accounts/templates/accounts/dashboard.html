@@ -1,0 +1,32 @@
+
+
+{% extends 'base.html' %}
+{% load static %}
+
+
+
+
+{% block content %}
+<br/><br/><br/><br/><br/><br/>
+    {% if request.user.id != user.id and not is_following%}
+    <button  id="following_btn"  data-id= "{{ user.id }}" class="btn btn-info text-center mx-auto" > follow </button>
+    {% elif request.user.id != user.id and is_following %}
+    <button  id="following_btn"  data-id= "{{ user.id }}" class="btn btn-danger text-center mx-auto" > unfollow </button>
+    {% endif %}
+
+    <h1> Hello</h1>
+
+
+    <h2>{{user.full_name}}</h2>
+    <h3>{{user.email}}</h3>
+    <h4>{{user.phone}}</h4>
+{% endblock content %}
+
+
+
+
+
+{% block js_files%}
+    <script src="{% static 'accounts/jquery/js/script.js' %}" ></script>
+
+{% endblock js_files%}

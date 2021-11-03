@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content%}
+
+{% for user in users %}
+<br/><br/><br/>
+    <div class="card text-center">
+        <div class="card-header">
+            {{user.full_name}}
+        </div>
+        <div class="card-body">
+        <h5 class="card-title">{{user.email}}</h5>
+        <p class="card-text">{{user.phone}}</p>
+        <a href="{% url 'accounts:dashboard' user.id %}" class="btn btn-primary">Show detail</a>
+        </div>
+        <div class="card-footer text-muted">
+        </div>
+    </div>
+
+{% endfor %}
+
+{% endblock content %}

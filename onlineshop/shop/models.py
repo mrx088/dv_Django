@@ -28,8 +28,9 @@ class Item (models.Model) :
     label = models.CharField(max_length=1,choices=item_label)
     price = models.DecimalField(max_digits=9,decimal_places=2)
     published = models.BooleanField(default=True)
-    num = models.IntegerField(default=1)
-
+    discount = models.IntegerField(blank=True,null=True)
+    number = models.IntegerField(default=1)
+    exist = models.BooleanField(default=True)
     
 
 
@@ -58,6 +59,12 @@ class OrderItem (models.Model):
     def get_cost(self):
         return self.price * self.quantity
 
+    def get_price (self) :
+        return self.quantity * self.product.price
+
+    def get_discount_price (self) :
+        return self.quantity * self.product.discount
+
 
 
 class Order (models.Model):
@@ -78,4 +85,4 @@ class Order (models.Model):
 
     
     def get_total_price(self):
-        return sum(item.get_cost for item in self.items.all())
+        return sum(item.get_cost() for item in self.items.all())

@@ -4,6 +4,7 @@ from django.contrib.auth.models import (
 )
 from phonenumber_field.modelfields import PhoneNumberField
 from .managers import Mymanager
+from django.conf import settings
 
 # Create your models here.
 
@@ -39,3 +40,14 @@ class User(AbstractBaseUser):
     @property
     def is_staff(self):
         return self.is_admin
+
+
+
+class follow (models.Model) :
+    from_user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE,related_name='follow')
+    to_user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE, related_name='following')
+
+
+
+    def __str__ (self) :
+        return f'{self.from_user} follow {self.to_user}'

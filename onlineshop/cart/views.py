@@ -2,7 +2,7 @@
 from django.shortcuts import redirect, render , get_object_or_404
 from .cart import Cart
 from .forms import QuantityForm
-from shop.models import Item
+from shop.models import Item , OrderItem
 from django.contrib import messages
 from django.views.decorators.http import require_POST
 # Create your views here.
@@ -10,7 +10,7 @@ from django.views.decorators.http import require_POST
 
 def shop_summary(reuqest):
     cart = Cart(reuqest)
-    return render (reuqest,'cart/shop_summary.html',{'cart':cart})
+    return render (reuqest,'cart/shop_summary.html',{'cart':cart,})
 
 
 

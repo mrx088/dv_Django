@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings 
+from accounts.models import User
 
 # Create your models here.
 class Contact (models.Model) :
@@ -8,3 +9,11 @@ class Contact (models.Model) :
     email = models.EmailField()
     subject = models.CharField(max_length=50)
     body = models.TextField()
+
+    def __str__(self):
+        return self.name
+
+
+
+
+

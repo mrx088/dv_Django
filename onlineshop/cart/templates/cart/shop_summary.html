@@ -22,12 +22,25 @@
           <div class="d-flex align-items-center"><img class="rounded-circle" src="{{item.product.photo.url}}" width="30"><span class="ml-2">{{item.product}}</span></div>
         </td>
         <td>{{ item.quantity }}</td>
-        <td>{{ item.price }}</td>
-        <td>{{ item.get_total_price }}</td>
+        {% if item.product.discount %}
+        <td>{{ item.product.discount }} $</td>
+        {% else %}
+        <td>{{ item.price }} $</td>
+        {% endif %}
+        <td>{{ item.total_price }} $</td>
         <td></td>
         <td><a class="btn btn-danger" href="{% url 'cart:cart_delete' item.product.id %}"> delete </a></td>
       </tr>
     {% endfor%}
+    <tr>
+      <td>Total</td>
+      <td colspan="3"></td>
+      <td>{{cart.get_total_price}} $</td>
+      <td>{{cart.get_quantity}}</td>
+    </tr>
     </tbody>
   </table>
+
+  <a href="{% url 'orders:create' %}" class="btn btn-primary">Total : {{cart.get_total_price}} $</a>
+
 {% endblock content%}
